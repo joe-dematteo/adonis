@@ -18,10 +18,10 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare fullName: string | null
 
   @column()
-  declare firstName: string | null
+  declare firstName: string
 
   @column()
-  declare lastName: string | null
+  declare lastName: string
 
   @column()
   declare email: string
@@ -37,3 +37,8 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 }
+
+type UserInstance = InstanceType<typeof User>
+type BaseModelInstance = InstanceType<typeof BaseModel>
+
+export type UserFields = Omit<UserInstance, keyof BaseModelInstance>

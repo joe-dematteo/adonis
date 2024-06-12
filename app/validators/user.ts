@@ -1,26 +1,13 @@
 import vine from '@vinejs/vine'
-import User from '#models/user'
-
-type UserFields = Partial<User>
+import User, { UserFields } from '#models/user'
 
 /**
- * Validates the post's creation action
+ * Validates user fields
  */
-export const createUserValidator = vine.compile(
+export const userValidator = vine.compile(
   vine.object<UserFields>({
-    firstName: vine.string().trim().minLength(6).nullable(),
-    lastName: vine.string().trim().nullable(),
-    email: vine.string().trim().escape().nullable(),
-  })
-)
-
-/**
- * Validates the post's update action
- */
-export const updateUserValidator = vine.compile(
-  vine.object<UserFields>({
-    firstName: vine.string().trim().minLength(6),
-    lastName: vine.string().trim().escape(),
-    email: vine.string().trim().escape(),
+    firstName: vine.string().trim().minLength(6).maxLength(255),
+    lastName: vine.string().trim(),
+    email: vine.string().email().trim(),
   })
 )

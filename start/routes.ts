@@ -16,4 +16,7 @@ router.get('/', async () => {
   }
 })
 
-router.get('users', [UsersController])
+router.post('users', [UsersController, 'create'])
+router.get('users', [UsersController, 'findMany'])
+router.get('users/:id', [UsersController, 'findOne'])
+router.put('users/:id', [UsersController, 'update'])

@@ -4,9 +4,9 @@ services:
   postgres:
     image: postgres:14-alpine
     environment:
-      POSTGRES_USER: pguser
-      POSTGRES_PASSWORD: pguser
-      POSTGRES_DB: pguser_dev
+      POSTGRES_USER: pg-adonis-user
+      POSTGRES_PASSWORD: pg-adonis-user
+      POSTGRES_DB: pg-adonis_dev
     ports:
       - "5432:5432"
     volumes:

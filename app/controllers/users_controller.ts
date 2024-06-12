@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user'
+import { DateTime } from 'luxon'
 
 export default class UsersController {
   async register({}: HttpContext) {}
@@ -29,7 +30,7 @@ export default class UsersController {
     return user
   }
 
-  async findMany({params}: HttpContext) {
+  async findMany({ params }: HttpContext) {
     const users = await User.all()
 
     return users
@@ -38,6 +39,23 @@ export default class UsersController {
   async findOne({ params }: HttpContext) {
     const id = params.id
     const user = await User.findOrFail(id)
+
+    return user
+  }
+
+  async create({ request }: HttpContext) {
+    console.log('create')
+    const data = request.only(['username', 'email', 'password'])
+    console.log('data', {
+      ...data,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    })
+    const user = await User.create({
+      ...data,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    })
 
     return user
   }
