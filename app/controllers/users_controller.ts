@@ -44,13 +44,8 @@ export default class UsersController {
   }
 
   async create({ request }: HttpContext) {
-    console.log('create')
     const data = request.only(['username', 'email', 'password'])
-    console.log('data', {
-      ...data,
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now(),
-    })
+
     const user = await User.create({
       ...data,
       createdAt: DateTime.now(),
